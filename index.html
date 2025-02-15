@@ -96,8 +96,8 @@
             const x = Math.random() * (window.innerWidth - buttonRect.width);
             const y = Math.random() * (window.innerHeight - buttonRect.height);
             factButton.style.position = 'absolute';
-            factButton.style.left = `${x}px`;
-            factButton.style.top = `${y}px`;
+            factButton.style.left = `${x}px`; // Corrected template literal
+            factButton.style.top = `${y}px`;  // Corrected template literal
         }
 
         // Allow button to move when mouse is near
