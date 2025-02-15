@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Elephant Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #fact-display {
+            font-size: 18px;
+            margin-bottom: 20px;
+            min-height: 50px; /* Prevent overflow */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Elephant Fact</h1>
+        <p id="fact-display">Click the button to get a random fact!</p>
+        <button id="fact-button">Get Random Fact</button>
+    </div>
+    <script>
+        const elephantFacts = [
+            "Elephants are the largest land animals on Earth.",
+            "They have a highly developed brain and are known for their intelligence.",
+            "Elephants can communicate using infrasound, which is sound below the frequency of human hearing.",
+            "Their trunks are incredibly versatile and can be used for breathing, smelling, lifting water, and grasping objects.",
+            "Elephants are social animals and live in family groups led by a matriarch.",
+            "They have a strong memory and can remember locations and other elephants for many years.",
+            "Elephants can consume up to 300 pounds of food in a single day.",
+            "They are known to exhibit behaviors such as mourning, playfulness, and even altruism.",
+            "Elephants have thick skin, but it is sensitive and can feel even the slightest touch.",
+            "There are three species of elephants: African bush elephants, African forest elephants, and Asian elephants."
+        ];
+
+        const factDisplay = document.getElementById('fact-display');
+        const factButton = document.getElementById('fact-button');
+        let attempts = 0;
+
+        function getRandomFact() {
+            const randomIndex = Math.floor(Math.random() * elephantFacts.length);
+            factDisplay.textContent = elephantFacts[randomIndex];
+        }
+
+        factButton.addEventListener('click', () => {
+            if (attempts < 3) {
+                attempts++;
+                moveButton();
+            } else {
+                getRandomFact();
+                attempts = 0; // Reset attempts after a successful click
+            }
+        });
+
+        function moveButton() {
+            const buttonRect = factButton.getBoundingClientRect();
+            const x = Math.random() * (window.innerWidth - buttonRect.width);
+            const y = Math.random() * (window.innerHeight - buttonRect.height);
+            factButton.style.position = 'absolute';
+            factButton.style.left = `${x}px`;
+            factButton.style.top = `${y}px`;
+        }
+
+        // Allow button to move when mouse is near
+        factButton.addEventListener('mouseover', moveButton);
+    </script>
+</body>
+</html>
